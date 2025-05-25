@@ -1,0 +1,24 @@
+# System files
+.DS_Store
+
+# Virtual environments and caches
+.venv/
+__pycache__/
+*.pyc
+
+# PyCharm project settings
+.idea/
+
+# Secrets and environment config
+.env
+
+# Output folders and temporary results
+logs/
+results/
+*.log
+*.enc
+
+# Local wallet and proxy data (do not commit to Git)
+config/evm.txt
+config/proxies.txt
+config/rpc.txt

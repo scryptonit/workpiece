@@ -1,0 +1,5 @@
+python-dotenv~=1.1.0
+primp~=0.15.0
+web3~=7.11.1
+loguru~=0.7.3
+cryptography~=44.0.2
