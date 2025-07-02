@@ -24,9 +24,12 @@ workpiece/
 │   ├── proxies.txt     # Прокси (в том же порядке, что и кошельки)
 │   └── rpc.txt         # Название сети и её RPC (через запятую)
 ├── core/
+│   ├── get_token_rate_coingecko.py # Получает данные о ценах с CoingeckoTerminal
 │   ├── get_wallets_data.py   # Расшифровка кошельков
 │   ├── settings.py           # Пути, настройки, переменные окружения
 │   └── tx_manager.py         # Логика транзакции
+├── utils/
+│   └── data_comparison.py # Визуально сравнивает две hex-строки callData
 ├── logs/               # Логи выполнения
 ├── results/            # Результаты выполнения
 ├── .env                # Конфигурация (безопасно, не в репозиторий)
