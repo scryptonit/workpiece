@@ -1,5 +1,8 @@
+dotenv~=0.9.9
 python-dotenv~=1.1.0
 primp~=0.15.0
 web3~=7.11.1
 loguru~=0.7.3
+requests~=2.32.3
 cryptography~=44.0.2
+colorama~=0.4.6
