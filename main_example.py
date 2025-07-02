@@ -1,11 +1,13 @@
 import os
 import random
 import asyncio
+import time
 from web3 import Web3
 from loguru import logger
 from core.get_wallets_data import get_wallets
 from core.tx_manager import TX_MANAGER
 from core.settings import evm_lines, proxy_lines, RPC_URL, RESULTS_DIR, LOG_DIR
+from core.get_token_rate import get_token_ratio_wei
 
 script_name = os.path.splitext(os.path.basename(__file__))[0]
 
@@ -35,6 +37,9 @@ def save_result(path, address):
     with open(path, "w") as f:
         for addr, stat in processed.items():
             f.write(f"{addr};{stat}\n")
+
+def deadline(seconds):
+    return hex(int(time.time()) + seconds)[2:]
 
 
 async def process_transactions():
