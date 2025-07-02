@@ -23,9 +23,12 @@ workpiece/
 │   ├── proxies.txt     # Corresponding proxies
 │   └── rpc.txt         # Chain name to RPC mapping
 ├── core/
+│   ├── get_token_rate_coingecko.py # Fetch price data from CoingeckoTerminal
 │   ├── get_wallets_data.py
 │   ├── settings.py
 │   └── tx_manager.py
+├── utils/
+│   └── data_comparison.py # Мisually compares two callData hex strings
 ├── logs/               # Script logs
 ├── results/            # Per-script transaction results
 ├── .env                # Environment config
