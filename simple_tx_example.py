@@ -59,9 +59,10 @@ async def process_transactions():
                 continue
 
             proxy = proxy_lines[evm_lines.index(address)]
+            # address_for_data = address.lower()[2:]
             #####################################################################
             chain_name = ''
-            data = ''
+            data = f''
             value = Web3.to_wei("0", "ether")
             to_address = Web3.to_checksum_address("")
             #####################################################################
