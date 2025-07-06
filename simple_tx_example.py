@@ -6,8 +6,7 @@ from web3 import Web3
 from loguru import logger
 from core.get_wallets_data import get_wallets
 from core.tx_manager import TX_MANAGER
-from core.settings import evm_lines, proxy_lines, RPC_URL, RESULTS_DIR, LOG_DIR
-from core.get_token_rate import get_token_ratio_wei
+from core.settings import evm_lines, proxy_lines, RESULTS_DIR, LOG_DIR
 
 script_name = os.path.splitext(os.path.basename(__file__))[0]
 
