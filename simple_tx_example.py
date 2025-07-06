@@ -60,18 +60,21 @@ async def process_transactions():
                 continue
 
             proxy = proxy_lines[evm_lines.index(address)]
-
+            #####################################################################
+            chain_name = ''
+            data = ''
+            value = Web3.to_wei("0", "ether")
+            to_address = Web3.to_checksum_address("")
+            #####################################################################
+            
             txm = TX_MANAGER(
-                chain_name="",
+                chain_name=chain_name,
                 address=address,
                 proxy_string=proxy
             )
 
             nonce = txm.get_nonce()
             gas = txm.get_gas_fees()
-            data = ''
-            value = Web3.to_wei("0", "ether")
-            to_address = Web3.to_checksum_address("")
 
             tx = {
                 "chainId": txm.chain_id,
