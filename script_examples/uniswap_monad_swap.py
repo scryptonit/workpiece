@@ -69,7 +69,7 @@ async def process_transactions():
 
             txm = TX_MANAGER(
                 chain_name="monad",
-                address=address,
+                private_key=private_key,
                 proxy_string=proxy
             )
 
@@ -136,19 +136,18 @@ async def process_transactions():
                 **gas
             }
 
+            
             tx["gas"] = int(txm.w3.eth.estimate_gas(tx) * random.uniform(1.12, 1.15))
 
-            signed = txm.w3.eth.account.sign_transaction(tx, private_key)
-            tx_hash = txm.send_transaction(signed)
+            tx_hash = txm.send_transaction(tx, description=f"Transaction for {address}")
 
-            logger.info(f"Transaction sent | {address}. {tx_hash.hex()}")
-            await asyncio.sleep(random.randint(15, 22))
+            await asyncio.sleep(random.randint(10, 12))
 
             receipt = await txm.check_transaction_status(tx_hash)
             if receipt and receipt.get("status") == 1:
                 logger.info(f"Confirmed: {tx_hash.hex()}")
                 save_result(RESULT_FILE, address)
-                await asyncio.sleep(random.randint(100, 150))
+                await asyncio.sleep(random.randint(10, 15))
             else:
                 logger.error(f"Transaction status error: {tx_hash.hex()}")
 
