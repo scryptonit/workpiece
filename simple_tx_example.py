@@ -18,6 +18,7 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 
 logger.add(LOG_FILE, format="{time} {level} {message}", level="INFO")
 
+
 def load_processed(path):
     processed = {}
     if os.path.exists(path):
@@ -30,12 +31,14 @@ def load_processed(path):
                     continue
     return processed
 
+
 def save_result(path, address):
     processed = load_processed(path)
     processed[address] = processed.get(address, 0) + 1
     with open(path, "w") as f:
         for addr, stat in processed.items():
             f.write(f"{addr};{stat}\n")
+
 
 def deadline(seconds):
     return hex(int(time.time()) + seconds)[2:]
@@ -66,10 +69,10 @@ async def process_transactions():
             value = Web3.to_wei("0", "ether")
             to_address = Web3.to_checksum_address("")
             #####################################################################
-            
+
             txm = TX_MANAGER(
                 chain_name=chain_name,
-                address=address,
+                private_key=private_key,
                 proxy_string=proxy
             )
 
@@ -88,17 +91,15 @@ async def process_transactions():
 
             tx["gas"] = int(txm.w3.eth.estimate_gas(tx) * random.uniform(1.12, 1.15))
 
-            signed = txm.w3.eth.account.sign_transaction(tx, private_key)
-            tx_hash = txm.send_transaction(signed)
+            tx_hash = txm.send_transaction(tx, description=f"Transaction for {address}")
 
-            logger.info(f"Transaction sent | {address}. {tx_hash.hex()}")
-            await asyncio.sleep(random.randint(15, 30))
+            await asyncio.sleep(random.randint(10, 12))
 
             receipt = await txm.check_transaction_status(tx_hash)
             if receipt and receipt.get("status") == 1:
                 logger.info(f"Confirmed: {tx_hash.hex()}")
                 save_result(RESULT_FILE, address)
-                await asyncio.sleep(random.randint(100, 150))
+                await asyncio.sleep(random.randint(10, 15))
             else:
                 logger.error(f"Transaction status error: {tx_hash.hex()}")
 
