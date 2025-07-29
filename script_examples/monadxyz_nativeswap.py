@@ -132,7 +132,7 @@ async def process_transactions():
 
             txm = TX_MANAGER(
                 chain_name=chain_name,
-                address=address,
+                private_key=private_key,
                 proxy_string=proxy
             )
             nonce = txm.get_nonce()
@@ -150,10 +150,8 @@ async def process_transactions():
 
             tx["gas"] = int(txm.w3.eth.estimate_gas(tx) * random.uniform(1.12, 1.15))
 
-            signed = txm.w3.eth.account.sign_transaction(tx, private_key)
-            tx_hash = txm.send_transaction(signed)
+            tx_hash = txm.send_transaction(tx, description=f"Transaction for {address}")
 
-            logger.info(f"Transaction sent | {address}. {tx_hash.hex()}")
             await asyncio.sleep(random.randint(10, 12))
 
             receipt = await txm.check_transaction_status(tx_hash)
