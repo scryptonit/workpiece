@@ -105,7 +105,7 @@ async def process_transactions():
 
             if amount_out > token_out_balance:
                 amount_out = round(token_out_balance * random.uniform(0.05, 0.1))
-                amount_in = int(amount_out * 1 / rate * 10 ** (decimals_token_in - decimals_token_out))
+                amount_in = int(round(amount_out * 1 / rate * 10 ** (decimals_token_in - decimals_token_out),-13))
 
             hex_amount_in = hex(amount_in)[2:]
             hex_min_amount_out = hex(min_amount_out)[2:]
