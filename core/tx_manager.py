@@ -163,7 +163,7 @@ class TX_MANAGER:
                 return True
 
             log.warning(f"Insufficient allowance ({current_allowance} < {amount_needed}). Proceeding with new approval.")
-            amount_to_approve = amount_needed
+            amount_to_approve = int(amount_needed * random.uniform(1.03, 1.1))
             contract = self.get_contract(token_address)
 
             tx_data = {
